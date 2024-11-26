@@ -13,6 +13,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserService userService;
 
@@ -55,6 +56,8 @@ public class UserController {
      */
     @PostMapping
     public Users createUser(@RequestBody Users user) {
+        System.out.println("----------------------------------");
+        System.out.println(user);
         return userService.saveUser(user);
     }
 
