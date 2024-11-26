@@ -2,12 +2,6 @@
 front/dist/
 front/node_modules/
 front/.angular/cache/
-front/.editorconfig
-front/README.md
-front/angular.json
-front/package-lock.json
-front/package.json
-front/tsconfig.*
 
 # Spring Boot build artifacts
 api/build/
@@ -15,6 +9,12 @@ api/.gradle/
 api/gradle/wrapper/
 api/gradlew*
 api/gradlew.bat
+
+# Keep essential configuration files
+front/angular.json
+front/package-lock.json
+front/package.json
+front/tsconfig.*
 
 # IDE-specific files
 .vscode/
@@ -26,10 +26,6 @@ Thumbs.db
 
 # Logs
 *.log
-
-# Dependencies
-vendor/
-webjars/
 
 # Other
 **/*.iml
