@@ -10,4 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * findById, delete, etc.
  */
 public interface UserRepository extends JpaRepository<Users, Long> {
+    Users findByMail(String mail);
 }

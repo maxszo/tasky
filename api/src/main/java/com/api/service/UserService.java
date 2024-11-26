@@ -24,6 +24,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public Users authenticateUser(String email, String password) {
+        Users user = userRepository.findByMail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null; // Return null if authentication fails
+    }
+
     /**
      * Retrieves all users from the repository.
      * 
