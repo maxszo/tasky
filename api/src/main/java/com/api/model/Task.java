@@ -17,11 +17,11 @@ public class Task {
     private String userStoryNumber;
     private String name;
     private String description;
-    private String state; // Examples: "TODO", "IN_PROGRESS", "DONE"
-    private String priority; // Examples: "LOW", "MEDIUM", "HIGH"
+    private String state;
+    private String priority;
 
     @ManyToOne
-    @JoinColumn(name = "users_id") // Foreign key column in the database
+    @JoinColumn(name = "users_id")
     @JsonIgnore
     private Users users;
 
