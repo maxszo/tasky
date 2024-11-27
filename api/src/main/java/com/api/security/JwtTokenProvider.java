@@ -1,6 +1,9 @@
 package com.api.security;
 
 import com.api.model.Users;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -19,5 +22,15 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // Set expiration time (1 hour)
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
+    }
+
+    // Extract the username (email) from the JWT token
+    public String getUsernameFromToken(String token) {
+        JwtParser parser = Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build(); // Build the parser
+
+        Claims claims = parser.parseClaimsJws(token).getBody(); // Parse the token
+        return claims.getSubject(); // Extract the username/email
     }
 }

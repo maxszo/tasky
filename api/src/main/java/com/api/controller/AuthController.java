@@ -41,4 +41,15 @@ public class AuthController {
         }
     }
 
+    // Get the current user's profile
+    @GetMapping("/profile")
+    public ResponseEntity<Users> getProfile(@RequestHeader("Authorization") String token) {
+        String email = tokenProvider.getUsernameFromToken(token.replace("Bearer ", ""));
+        Users user = userService.getUserByEmail(email); // Fetch user from DB by email
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.status(404).body(null); // User not found
+    }
+
 }

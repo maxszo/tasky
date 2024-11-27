@@ -1,0 +1,59 @@
+<!-- profile.component.html -->
+<div class="profile-container">
+  <h2>User Profile</h2>
+
+  <!-- Profile Form -->
+  <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input
+        type="text"
+        id="firstname"
+        name="firstname"
+        [(ngModel)]="user.firstname"
+        required
+        placeholder="Enter your first name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        [(ngModel)]="user.lastname"
+        required
+        placeholder="Enter your last name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mail">Email</label>
+      <input
+        type="email"
+        id="mail"
+        name="mail"
+        [(ngModel)]="user.mail"
+        required
+        placeholder="Enter your email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        placeholder="Enter a new password (optional)"
+      />
+    </div>
+
+    <button type="submit" class="btn-submit">Update Profile</button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+</div>
