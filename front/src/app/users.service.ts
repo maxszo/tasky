@@ -5,16 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TasksService {
-  private apiUrl = 'http://localhost:8080/api/tasks';
+export class UserService {
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 
-  getTasks(): Observable<any[]> {
+  getUsers(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
-  }
-
-  createTask(task: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, task);
   }
 }

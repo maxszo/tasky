@@ -1,43 +1,104 @@
-<div class="tasks-container">
-  <div class="column todo">
-    <h2>Todo</h2>
-    <div *ngFor="let task of todoTasks" class="task-card">
-      <h3>{{ task.name }}</h3>
-      <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <p><strong>Priority:</strong> {{ task.priority }}</p>
-      <p *ngIf="task.users">
-        <strong>User:</strong> {{ task.users.firstname }}
-        {{ task.users.lastname }}
-      </p>
-    </div>
+<div class="tasks-page">
+  <!-- Button to toggle form -->
+  <button class="create-task-btn" (click)="toggleForm()">+ Create Task</button>
+
+  <!-- Task creation form -->
+  <div *ngIf="showForm" class="task-form">
+    <h3>Create a New Task</h3>
+    <form (ngSubmit)="createTask()">
+      <label>
+        Task Name:
+        <input type="text" [(ngModel)]="newTask.name" name="name" required />
+      </label>
+      <label>
+        User Story #:
+        <input
+          type="text"
+          [(ngModel)]="newTask.userStoryNumber"
+          name="userStoryNumber"
+          required
+        />
+      </label>
+      <label>
+        Description:
+        <textarea
+          [(ngModel)]="newTask.description"
+          name="description"
+          required
+        ></textarea>
+      </label>
+      <label>
+        Priority:
+        <select [(ngModel)]="newTask.priority" name="priority" required>
+          <option value="HIGH">High</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="LOW">Low</option>
+        </select>
+      </label>
+      <label>
+        State:
+        <select [(ngModel)]="newTask.state" name="state">
+          <option value="TO_DO">To Do</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="DONE">Done</option>
+        </select>
+      </label>
+      <label>
+        Assign User:
+        <select [(ngModel)]="newTask.users" name="users">
+          <option [ngValue]="null">Unassigned</option>
+          <option *ngFor="let user of users" [ngValue]="user">
+            {{ user.firstname }} {{ user.lastname }}
+          </option>
+        </select>
+      </label>
+      <button type="submit">Create Task</button>
+      <button type="button" (click)="toggleForm()">Cancel</button>
+    </form>
   </div>
 
-  <div class="column in-progress">
-    <h2>In Progress</h2>
-    <div *ngFor="let task of inProgressTasks" class="task-card">
-      <h3>{{ task.name }}</h3>
-      <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <p><strong>Priority:</strong> {{ task.priority }}</p>
-      <p *ngIf="task.users">
-        <strong>User:</strong> {{ task.users.firstname }}
-        {{ task.users.lastname }}
-      </p>
+  <!-- Task columns -->
+  <div class="tasks-container">
+    <div class="column todo">
+      <h2>Todo</h2>
+      <div *ngFor="let task of todoTasks" class="task-card">
+        <h3>{{ task.name }}</h3>
+        <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p *ngIf="task.users">
+          <strong>User:</strong> {{ task.users.firstname }}
+          {{ task.users.lastname }}
+        </p>
+      </div>
     </div>
-  </div>
 
-  <div class="column done">
-    <h2>Done</h2>
-    <div *ngFor="let task of doneTasks" class="task-card">
-      <h3>{{ task.name }}</h3>
-      <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <p><strong>Priority:</strong> {{ task.priority }}</p>
-      <p *ngIf="task.users">
-        <strong>User:</strong> {{ task.users.firstname }}
-        {{ task.users.lastname }}
-      </p>
+    <div class="column in-progress">
+      <h2>In Progress</h2>
+      <div *ngFor="let task of inProgressTasks" class="task-card">
+        <h3>{{ task.name }}</h3>
+        <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p *ngIf="task.users">
+          <strong>User:</strong> {{ task.users.firstname }}
+          {{ task.users.lastname }}
+        </p>
+      </div>
+    </div>
+
+    <div class="column done">
+      <h2>Done</h2>
+      <div *ngFor="let task of doneTasks" class="task-card">
+        <h3>{{ task.name }}</h3>
+        <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p *ngIf="task.users">
+          <strong>User:</strong> {{ task.users.firstname }}
+          {{ task.users.lastname }}
+        </p>
+      </div>
     </div>
   </div>
 </div>
