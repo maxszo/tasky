@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';  // <-- Add this for ngModel
-import { CommonModule } from '@angular/common';  // <-- Add this for *ngIf
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule
+  ],
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
@@ -24,9 +35,9 @@ export class LoginComponent {
 
     this.http.post<{ token: string }>('http://localhost:8080/api/auth/login', loginData).subscribe({
       next: (response) => {
-        localStorage.setItem('authToken', response.token); // Stocker le token
+        localStorage.setItem('authToken', response.token);
         alert('Login successful!');
-        this.router.navigate(['/tasks']); // Rediriger vers la page des tâches
+        this.router.navigate(['/tasks']);
       },
       error: (error) => {
         this.errorMessage = 'Login failed. Please check your credentials.';

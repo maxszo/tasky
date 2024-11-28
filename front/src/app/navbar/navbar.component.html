@@ -1,11 +1,21 @@
-<nav class="navbar">
-  <div class="navbar-brand">
-    <span>Tasky</span>
-  </div>
+<mat-toolbar color="primary" class="navbar">
+  <span class="navbar-brand">Tasky</span>
+
   <div class="navbar-links">
-    <a href="/tasks" class="nav-btn">Progress</a>
-    <a href="/statistic" class="nav-btn">Statistics</a>
-    <a href="/profile" class="nav-btn">Profile</a>
-    <a (click)="onLogout()" class="logout-link">Logout</a>
+    <button mat-button routerLink="/tasks" class="nav-btn">
+      <mat-icon>work</mat-icon>
+      <a href="/tasks" class="nav-btn">Progress</a>
+    </button>
+    <button mat-button routerLink="/statistic" class="nav-btn">
+      <mat-icon>insert_chart</mat-icon>
+      <a href="/statistic" class="nav-btn">Statistic</a>
+    </button>
+    <button mat-button routerLink="/profile" class="nav-btn">
+      <mat-icon>account_circle</mat-icon>
+      <a href="/profile" class="nav-btn">Profile</a>
+    </button>
+    <button mat-button (click)="onLogout()" class="logout-btn">
+      <mat-icon>exit_to_app</mat-icon> Logout
+    </button>
   </div>
-</nav>
+</mat-toolbar>

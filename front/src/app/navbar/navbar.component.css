@@ -1,41 +1,39 @@
+/* Toolbar container */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-  }
-  
-  .navbar-brand {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .nav-btn {
-    background: none;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-  }
-  
-  .nav-btn:hover {
-    text-decoration: underline;
-  }
-  
-  .logout-link {
-    color: red;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .logout-link:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: rgb(215,227,255);
+}
+
+/* Navbar brand styling */
+.navbar-brand {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: rgb(0,92,187);
+}
+
+/* Navbar links container */
+.navbar-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* Styling for each nav button */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between icon and text */
+  color: rgb(0,92,187);
+}
+
+/* Hover effect for buttons */
+.mat-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+}
+
+/* Hover effect for logout button */
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+}

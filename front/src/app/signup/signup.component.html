@@ -1,64 +1,84 @@
 <div class="signup-container">
-  <h2>Create an Account</h2>
-  <form (ngSubmit)="onSignup()" #signupForm="ngForm">
-    <div class="form-group">
-      <label for="firstname">First Name</label>
-      <input
-        type="text"
-        id="firstname"
-        name="firstname"
-        [(ngModel)]="signupData.firstname"
-        required
-        placeholder="Enter your first name"
-      />
-    </div>
-    <div class="form-group">
-      <label for="lastname">Last Name</label>
-      <input
-        type="text"
-        id="lastname"
-        name="lastname"
-        [(ngModel)]="signupData.lastname"
-        required
-        placeholder="Enter your last name"
-      />
-    </div>
-    <div class="form-group">
-      <label for="mail">Mail</label>
-      <input
-        type="mail"
-        id="mail"
-        name="mail"
-        [(ngModel)]="signupData.mail"
-        required
-        placeholder="Enter your mail"
-      />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="signupData.password"
-        required
-        placeholder="Enter a strong password"
-      />
-    </div>
-    <div class="form-group">
-      <label for="job">Job</label>
-      <select id="job" name="job" [(ngModel)]="signupData.job" required>
-        <option value="" disabled selected>Choose your job</option>
-        <option value="DEVELOPPEUR">Développeur</option>
-        <option value="DEVOPS">DevOps</option>
-        <option value="CHEF_DE_PROJET">Chef de Projet</option>
-        <option value="PRODUCT_OWNER">Product Owner</option>
-        <option value="ARCHITECTE_INFRA">Architecte Infra</option>
-      </select>
-    </div>
-    <button type="submit" class="btn-submit">Sign Up</button>
-  </form>
-  <p>Already have an account? <a href="/login">Log in here</a></p>
+  <div class="signup-form-box">
+    <h2>Create an Account</h2>
 
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <form (ngSubmit)="onSignup()" #signupForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          type="text"
+          id="firstname"
+          name="firstname"
+          [(ngModel)]="signupData.firstname"
+          required
+          placeholder="Enter your first name"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          type="text"
+          id="lastname"
+          name="lastname"
+          [(ngModel)]="signupData.lastname"
+          required
+          placeholder="Enter your last name"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          id="mail"
+          name="mail"
+          [(ngModel)]="signupData.mail"
+          required
+          placeholder="Enter your mail"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="signupData.password"
+          required
+          placeholder="Enter a strong password"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Job</mat-label>
+        <mat-select [(ngModel)]="signupData.job" name="job" required>
+          <mat-option value="" disabled selected>Choose your job</mat-option>
+          <mat-option value="DEVELOPPEUR">Développeur</mat-option>
+          <mat-option value="DEVOPS">DevOps</mat-option>
+          <mat-option value="CHEF_DE_PROJET">Chef de Projet</mat-option>
+          <mat-option value="PRODUCT_OWNER">Product Owner</mat-option>
+          <mat-option value="ARCHITECTE_INFRA">Architecte Infra</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="isLoading"
+      >
+        Sign Up
+      </button>
+    </form>
+
+    <p>Already have an account? <a href="/login">Log in here</a></p>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </div>
 </div>
