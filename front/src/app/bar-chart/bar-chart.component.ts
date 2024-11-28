@@ -65,7 +65,7 @@ export class BarChartComponent {
           {
             label: "TO_DO",
             data: todoCounts,
-            backgroundColor: '#ADD8E6', // Light Blue
+            backgroundColor: '#F08080', // Light Blue
           },
           {
             label: "IN_PROGRESS",
@@ -75,7 +75,7 @@ export class BarChartComponent {
           {
             label: "DONE",
             data: doneCounts,
-            backgroundColor: '#F08080', // Light Coral/Red
+            backgroundColor: '#ADD8E6', // Light Coral/Red
           },
         ],
       },

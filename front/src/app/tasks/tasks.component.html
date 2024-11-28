@@ -1,4 +1,31 @@
 <div class="tasks-page">
+  <!-- Filters Section -->
+  <div class="filters">
+    <label for="user-filter">User:</label>
+    <select
+      id="user-filter"
+      [(ngModel)]="selectedUser"
+      (change)="onUserChange()"
+    >
+      <option [ngValue]="null">All Users</option>
+      <option *ngFor="let user of users" [ngValue]="user">
+        {{ user.firstname }} {{ user.lastname }}
+      </option>
+    </select>
+
+    <label for="priority-filter">Priority:</label>
+    <select
+      id="priority-filter"
+      [(ngModel)]="selectedPriority"
+      (change)="onPriorityChange()"
+    >
+      <option value="ALL">All Priorities</option>
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
+  </div>
+
   <!-- Button to toggle form -->
   <button class="create-task-btn" (click)="toggleForm()">+ Create Task</button>
 
@@ -57,6 +84,66 @@
     </form>
   </div>
 
+  <!-- Task update form -->
+  <div *ngIf="showUpdateForm" class="task-form">
+    <h3>Update Task</h3>
+    <form (ngSubmit)="updateTask()">
+      <label>
+        Task Name:
+        <input
+          type="text"
+          [(ngModel)]="taskToUpdate.name"
+          name="name"
+          required
+        />
+      </label>
+      <label>
+        User Story #:
+        <input
+          type="text"
+          [(ngModel)]="taskToUpdate.userStoryNumber"
+          name="userStoryNumber"
+          required
+        />
+      </label>
+      <label>
+        Description:
+        <textarea
+          [(ngModel)]="taskToUpdate.description"
+          name="description"
+          required
+        ></textarea>
+      </label>
+      <label>
+        Priority:
+        <select [(ngModel)]="taskToUpdate.priority" name="priority" required>
+          <option value="HIGH">High</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="LOW">Low</option>
+        </select>
+      </label>
+      <label>
+        State:
+        <select [(ngModel)]="taskToUpdate.state" name="state">
+          <option value="TO_DO">To Do</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="DONE">Done</option>
+        </select>
+      </label>
+      <label>
+        Assign User:
+        <select [(ngModel)]="taskToUpdate.users" name="users">
+          <option [ngValue]="null">Unassigned</option>
+          <option *ngFor="let user of users" [ngValue]="user">
+            {{ user.firstname }} {{ user.lastname }}
+          </option>
+        </select>
+      </label>
+      <button type="submit">Update Task</button>
+      <button type="button" (click)="cancelUpdate()">Cancel</button>
+    </form>
+  </div>
+
   <!-- Task columns -->
   <div class="tasks-container">
     <div class="column todo">
@@ -70,6 +157,8 @@
           <strong>User:</strong> {{ task.users.firstname }}
           {{ task.users.lastname }}
         </p>
+        <button (click)="deleteTask(task.id)">Delete</button>
+        <button (click)="showUpdateFormModal(task)">Update</button>
       </div>
     </div>
 
@@ -84,6 +173,8 @@
           <strong>User:</strong> {{ task.users.firstname }}
           {{ task.users.lastname }}
         </p>
+        <button (click)="deleteTask(task.id)">Delete</button>
+        <button (click)="showUpdateFormModal(task)">Update</button>
       </div>
     </div>
 
@@ -98,6 +189,8 @@
           <strong>User:</strong> {{ task.users.firstname }}
           {{ task.users.lastname }}
         </p>
+        <button (click)="deleteTask(task.id)">Delete</button>
+        <button (click)="showUpdateFormModal(task)">Update</button>
       </div>
     </div>
   </div>

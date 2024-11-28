@@ -10,11 +10,23 @@ export class TasksService {
 
   constructor(private http: HttpClient) {}
 
+  // Fetch all tasks
   getTasks(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  // Create a new task
   createTask(task: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, task);
+  }
+
+  // Delete a task by ID
+  deleteTask(taskId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${taskId}`);
+  }
+
+  // Update an existing task
+  updateTask(taskId: number, task: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${taskId}`, task);
   }
 }
