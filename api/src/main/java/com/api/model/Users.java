@@ -2,6 +2,7 @@ package com.api.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Represents a user in the Tasky application.
@@ -21,6 +22,7 @@ public class Users {
     private String password;
     private String job;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 

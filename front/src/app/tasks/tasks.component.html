@@ -1,1 +1,43 @@
-<p>tasks works!</p>
+<div class="tasks-container">
+  <div class="column todo">
+    <h2>Todo</h2>
+    <div *ngFor="let task of todoTasks" class="task-card">
+      <h3>{{ task.name }}</h3>
+      <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <p><strong>Priority:</strong> {{ task.priority }}</p>
+      <p *ngIf="task.users">
+        <strong>User:</strong> {{ task.users.firstname }}
+        {{ task.users.lastname }}
+      </p>
+    </div>
+  </div>
+
+  <div class="column in-progress">
+    <h2>In Progress</h2>
+    <div *ngFor="let task of inProgressTasks" class="task-card">
+      <h3>{{ task.name }}</h3>
+      <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <p><strong>Priority:</strong> {{ task.priority }}</p>
+      <p *ngIf="task.users">
+        <strong>User:</strong> {{ task.users.firstname }}
+        {{ task.users.lastname }}
+      </p>
+    </div>
+  </div>
+
+  <div class="column done">
+    <h2>Done</h2>
+    <div *ngFor="let task of doneTasks" class="task-card">
+      <h3>{{ task.name }}</h3>
+      <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <p><strong>Priority:</strong> {{ task.priority }}</p>
+      <p *ngIf="task.users">
+        <strong>User:</strong> {{ task.users.firstname }}
+        {{ task.users.lastname }}
+      </p>
+    </div>
+  </div>
+</div>

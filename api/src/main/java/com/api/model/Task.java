@@ -1,7 +1,5 @@
 package com.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 /**
@@ -22,7 +20,6 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "users_id")
-    @JsonIgnore
     private Users users;
 
     /**
