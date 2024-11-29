@@ -1,59 +1,65 @@
-<!-- profile.component.html -->
 <div class="profile-container">
-  <h2>User Profile</h2>
+  <mat-card class="profile-card">
+    <h2 class="card-title">User Profile</h2>
 
-  <!-- Profile Form -->
-  <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
-    <div class="form-group">
-      <label for="firstname">First Name</label>
-      <input
-        type="text"
-        id="firstname"
-        name="firstname"
-        [(ngModel)]="user.firstname"
-        required
-        placeholder="Enter your first name"
-      />
-    </div>
+    <!-- Profile Form -->
+    <form (ngSubmit)="onSubmit()" #profileForm="ngForm" class="form">
+      <mat-form-field class="full-width">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.firstname"
+          name="firstname"
+          required
+        />
+        <mat-error *ngIf="profileForm.submitted && !user.firstname"
+          >First Name is required</mat-error
+        >
+      </mat-form-field>
 
-    <div class="form-group">
-      <label for="lastname">Last Name</label>
-      <input
-        type="text"
-        id="lastname"
-        name="lastname"
-        [(ngModel)]="user.lastname"
-        required
-        placeholder="Enter your last name"
-      />
-    </div>
+      <mat-form-field class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="user.lastname" name="lastname" required />
+        <mat-error *ngIf="profileForm.submitted && !user.lastname"
+          >Last Name is required</mat-error
+        >
+      </mat-form-field>
 
-    <div class="form-group">
-      <label for="mail">Email</label>
-      <input
-        type="email"
-        id="mail"
-        name="mail"
-        [(ngModel)]="user.mail"
-        required
-        placeholder="Enter your email"
-      />
-    </div>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="user.mail"
+          name="mail"
+          required
+        />
+        <mat-error *ngIf="profileForm.submitted && !user.mail"
+          >Email is required</mat-error
+        >
+      </mat-form-field>
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="user.password"
-        placeholder="Enter a new password (optional)"
-      />
-    </div>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="user.password"
+          name="password"
+        />
+        <mat-hint
+          >Leave blank if you don't want to change your password</mat-hint
+        >
+      </mat-form-field>
 
-    <button type="submit" class="btn-submit">Update Profile</button>
-  </form>
+      <button mat-flat-button color="primary" type="submit" class="btn-submit">
+        Update Profile
+      </button>
+    </form>
 
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+    <mat-error *ngIf="errorMessage" class="error">{{ errorMessage }}</mat-error>
+    <mat-hint *ngIf="successMessage" class="success">{{
+      successMessage
+    }}</mat-hint>
+  </mat-card>
 </div>

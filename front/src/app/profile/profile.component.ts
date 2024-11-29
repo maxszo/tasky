@@ -3,11 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';  // <-- Add this for ngModel
 import { CommonModule } from '@angular/common';  // <-- Add this for *ngIf
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule],
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {

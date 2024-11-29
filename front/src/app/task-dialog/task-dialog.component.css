@@ -1,0 +1,43 @@
+/* Ensure the dialog content is centered */
+.mat-dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Center the dialog title */
+  h2.mat-dialog-title {
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Center the form inside the dialog */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  button.mat-button,
+  button.mat-raised-button {
+    min-width: 100px;
+  }
+  
+  /* Optional: You can also set a specific height for the dialog if necessary */
+  .mat-dialog-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  

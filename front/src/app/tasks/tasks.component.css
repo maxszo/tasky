@@ -1,39 +1,124 @@
+.tasks-page {
+  padding: 10px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters {
+  display: flex;
+  gap: 20px;
+}
+
+.create-task-btn {
+  padding: 10px 20px;
+}
+
+/* Tasks container layout */
 .tasks-container {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .column {
-    flex: 1;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  .column h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .task-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .task-card h3 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #444;
-  }
-  
-  .task-card p {
-    margin: 5px 0;
-    font-size: 0.9em;
-  }
-  
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.column h2 {
+  text-align: center;
+  color: #333;
+}
+
+.task-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-card h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #444;
+}
+
+.task-card p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+.task-card .task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-card .task-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #444;
+}
+
+.task-card .user-story-badge {
+  background-color: #5e6061; /* Gray badge */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+/* Styled badges for priority levels */
+.task-card .badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: white;
+}
+
+.task-card .badge.high {
+  background-color: #e53935; /* Red */
+}
+
+.task-card .badge.medium {
+  background-color: #fba22d; /* Yellow */
+}
+
+.task-card .badge.low {
+  background-color: #43a047; /* Green */
+}
+
+/* Task actions buttons */
+.task-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.task-actions .delete-btn {
+  color: red; /* Makes text color red for delete button */
+}
+
+.task-actions button[color="warn"]:hover {
+  background-color: rgba(255, 0, 0, 0.05); /* Light red background on hover */
+}
+
+/* Styling the filter section */
+.filters-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}

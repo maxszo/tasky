@@ -1,196 +1,188 @@
 <div class="tasks-page">
   <!-- Filters Section -->
-  <div class="filters">
-    <label for="user-filter">User:</label>
-    <select
-      id="user-filter"
-      [(ngModel)]="selectedUser"
-      (change)="onUserChange()"
-    >
-      <option [ngValue]="null">All Users</option>
-      <option *ngFor="let user of users" [ngValue]="user">
-        {{ user.firstname }} {{ user.lastname }}
-      </option>
-    </select>
-
-    <label for="priority-filter">Priority:</label>
-    <select
-      id="priority-filter"
-      [(ngModel)]="selectedPriority"
-      (change)="onPriorityChange()"
-    >
-      <option value="ALL">All Priorities</option>
-      <option value="HIGH">High</option>
-      <option value="MEDIUM">Medium</option>
-      <option value="LOW">Low</option>
-    </select>
-  </div>
-
-  <!-- Button to toggle form -->
-  <button class="create-task-btn" (click)="toggleForm()">+ Create Task</button>
-
-  <!-- Task creation form -->
-  <div *ngIf="showForm" class="task-form">
-    <h3>Create a New Task</h3>
-    <form (ngSubmit)="createTask()">
-      <label>
-        Task Name:
-        <input type="text" [(ngModel)]="newTask.name" name="name" required />
-      </label>
-      <label>
-        User Story #:
-        <input
-          type="text"
-          [(ngModel)]="newTask.userStoryNumber"
-          name="userStoryNumber"
-          required
-        />
-      </label>
-      <label>
-        Description:
-        <textarea
-          [(ngModel)]="newTask.description"
-          name="description"
-          required
-        ></textarea>
-      </label>
-      <label>
-        Priority:
-        <select [(ngModel)]="newTask.priority" name="priority" required>
-          <option value="HIGH">High</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="LOW">Low</option>
-        </select>
-      </label>
-      <label>
-        State:
-        <select [(ngModel)]="newTask.state" name="state">
-          <option value="TO_DO">To Do</option>
-          <option value="IN_PROGRESS">In Progress</option>
-          <option value="DONE">Done</option>
-        </select>
-      </label>
-      <label>
-        Assign User:
-        <select [(ngModel)]="newTask.users" name="users">
-          <option [ngValue]="null">Unassigned</option>
-          <option *ngFor="let user of users" [ngValue]="user">
+  <div class="head">
+    <div class="filters">
+      <mat-form-field appearance="fill">
+        <mat-label>User</mat-label>
+        <mat-select
+          [(ngModel)]="selectedUser"
+          (selectionChange)="onUserChange()"
+        >
+          <mat-option [value]="null">All Users</mat-option>
+          <mat-option *ngFor="let user of users" [value]="user">
             {{ user.firstname }} {{ user.lastname }}
-          </option>
-        </select>
-      </label>
-      <button type="submit">Create Task</button>
-      <button type="button" (click)="toggleForm()">Cancel</button>
-    </form>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Priority</mat-label>
+        <mat-select
+          [(ngModel)]="selectedPriority"
+          (selectionChange)="onPriorityChange()"
+        >
+          <mat-option value="ALL">All Priorities</mat-option>
+          <mat-option value="HIGH">High</mat-option>
+          <mat-option value="MEDIUM">Medium</mat-option>
+          <mat-option value="LOW">Low</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Button to open create task dialog -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="create-task-btn"
+      (click)="openCreateDialog()"
+    >
+      + Create Task
+    </button>
   </div>
 
-  <!-- Task update form -->
-  <div *ngIf="showUpdateForm" class="task-form">
-    <h3>Update Task</h3>
-    <form (ngSubmit)="updateTask()">
-      <label>
-        Task Name:
-        <input
-          type="text"
-          [(ngModel)]="taskToUpdate.name"
-          name="name"
-          required
-        />
-      </label>
-      <label>
-        User Story #:
-        <input
-          type="text"
-          [(ngModel)]="taskToUpdate.userStoryNumber"
-          name="userStoryNumber"
-          required
-        />
-      </label>
-      <label>
-        Description:
-        <textarea
-          [(ngModel)]="taskToUpdate.description"
-          name="description"
-          required
-        ></textarea>
-      </label>
-      <label>
-        Priority:
-        <select [(ngModel)]="taskToUpdate.priority" name="priority" required>
-          <option value="HIGH">High</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="LOW">Low</option>
-        </select>
-      </label>
-      <label>
-        State:
-        <select [(ngModel)]="taskToUpdate.state" name="state">
-          <option value="TO_DO">To Do</option>
-          <option value="IN_PROGRESS">In Progress</option>
-          <option value="DONE">Done</option>
-        </select>
-      </label>
-      <label>
-        Assign User:
-        <select [(ngModel)]="taskToUpdate.users" name="users">
-          <option [ngValue]="null">Unassigned</option>
-          <option *ngFor="let user of users" [ngValue]="user">
-            {{ user.firstname }} {{ user.lastname }}
-          </option>
-        </select>
-      </label>
-      <button type="submit">Update Task</button>
-      <button type="button" (click)="cancelUpdate()">Cancel</button>
-    </form>
-  </div>
-
-  <!-- Task columns -->
+  <!-- Task Columns -->
   <div class="tasks-container">
+    <!-- Todo Column -->
     <div class="column todo">
       <h2>Todo</h2>
       <div *ngFor="let task of todoTasks" class="task-card">
-        <h3>{{ task.name }}</h3>
-        <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+        <div class="task-header">
+          <h3>{{ task.name }}</h3>
+          <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
+        </div>
         <p><strong>Description:</strong> {{ task.description }}</p>
-        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p>
+          <strong>Priority:</strong>
+          <span
+            class="badge"
+            [ngClass]="{
+              high: task.priority === 'HIGH',
+              medium: task.priority === 'MEDIUM',
+              low: task.priority === 'LOW'
+            }"
+          >
+            {{ task.priority }}
+          </span>
+        </p>
+
         <p *ngIf="task.users">
           <strong>User:</strong> {{ task.users.firstname }}
           {{ task.users.lastname }}
         </p>
-        <button (click)="deleteTask(task.id)">Delete</button>
-        <button (click)="showUpdateFormModal(task)">Update</button>
+
+        <div class="task-actions">
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="openUpdateDialog(task)"
+          >
+            <mat-icon>edit</mat-icon> Update
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            class="delete-btn"
+            (click)="deleteTask(task.id)"
+          >
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </div>
       </div>
     </div>
 
+    <!-- In Progress Column -->
     <div class="column in-progress">
       <h2>In Progress</h2>
       <div *ngFor="let task of inProgressTasks" class="task-card">
-        <h3>{{ task.name }}</h3>
-        <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+        <div class="task-header">
+          <h3>{{ task.name }}</h3>
+          <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
+        </div>
         <p><strong>Description:</strong> {{ task.description }}</p>
-        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p>
+          <strong>Priority:</strong>
+          <span
+            class="badge"
+            [ngClass]="{
+              high: task.priority === 'HIGH',
+              medium: task.priority === 'MEDIUM',
+              low: task.priority === 'LOW'
+            }"
+          >
+            {{ task.priority }}
+          </span>
+        </p>
+
         <p *ngIf="task.users">
           <strong>User:</strong> {{ task.users.firstname }}
           {{ task.users.lastname }}
         </p>
-        <button (click)="deleteTask(task.id)">Delete</button>
-        <button (click)="showUpdateFormModal(task)">Update</button>
+
+        <div class="task-actions">
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="openUpdateDialog(task)"
+          >
+            <mat-icon>edit</mat-icon> Update
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            class="delete-btn"
+            (click)="deleteTask(task.id)"
+          >
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </div>
       </div>
     </div>
 
+    <!-- Done Column -->
     <div class="column done">
       <h2>Done</h2>
       <div *ngFor="let task of doneTasks" class="task-card">
-        <h3>{{ task.name }}</h3>
-        <p><strong>User Story #:</strong> {{ task.userStoryNumber }}</p>
+        <div class="task-header">
+          <h3>{{ task.name }}</h3>
+          <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
+        </div>
         <p><strong>Description:</strong> {{ task.description }}</p>
-        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p>
+          <strong>Priority:</strong>
+          <span
+            class="badge"
+            [ngClass]="{
+              high: task.priority === 'HIGH',
+              medium: task.priority === 'MEDIUM',
+              low: task.priority === 'LOW'
+            }"
+          >
+            {{ task.priority }}
+          </span>
+        </p>
+
         <p *ngIf="task.users">
           <strong>User:</strong> {{ task.users.firstname }}
           {{ task.users.lastname }}
         </p>
-        <button (click)="deleteTask(task.id)">Delete</button>
-        <button (click)="showUpdateFormModal(task)">Update</button>
+
+        <div class="task-actions">
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="openUpdateDialog(task)"
+          >
+            <mat-icon>edit</mat-icon> Update
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            class="delete-btn"
+            (click)="deleteTask(task.id)"
+          >
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </div>
       </div>
     </div>
   </div>

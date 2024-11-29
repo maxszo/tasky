@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Task Name</mat-label>
+      <input matInput [(ngModel)]="data.task.name" name="name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>User Story #</mat-label>
+      <input
+        matInput
+        [(ngModel)]="data.task.userStoryNumber"
+        name="userStoryNumber"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="data.task.description"
+        name="description"
+        required
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Priority</mat-label>
+      <mat-select [(ngModel)]="data.task.priority" name="priority" required>
+        <mat-option value="HIGH">High</mat-option>
+        <mat-option value="MEDIUM">Medium</mat-option>
+        <mat-option value="LOW">Low</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Assign User</mat-label>
+      <mat-select [(ngModel)]="data.task.users" name="users">
+        <mat-option [value]="null">Unassigned</mat-option>
+        <mat-option *ngFor="let user of data.users" [value]="user">
+          {{ user.firstname }} {{ user.lastname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>State</mat-label>
+      <mat-select [(ngModel)]="data.task.state" name="state" required>
+        <mat-option value="TO_DO">To Do</mat-option>
+        <mat-option value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option value="DONE">Done</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Save</button>
+</div>
