@@ -32,10 +32,13 @@ mat-form-field {
 
 /* Style the login button */
 button {
-  width: 100%;  /* Make button full width */
+  width: 70%; /* Set button width to 70% */
   padding: 10px;
-  margin-top: 10px;
+  margin: 10px auto 0; /* Center the button horizontally with auto margins */
+  display: block; /* Ensure the button is treated as a block element */
 }
+
+
 
 /* Style the error message */
 .error {
@@ -55,4 +58,10 @@ mat-progress-spinner {
   background-color: #4caf50;  /* Green */
   color: white;
   font-weight: bold;
+}
+
+/* Center additional text */
+.center-text {
+  text-align: center;
+  margin-top: 15px;
 }

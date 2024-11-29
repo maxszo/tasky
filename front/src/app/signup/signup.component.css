@@ -14,7 +14,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   box-sizing: border-box;
 }
 
@@ -22,6 +22,17 @@
 h2 {
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* Style the form columns */
+.form-columns {
+  display: flex;
+  gap: 20px;
+}
+
+.left-column,
+.right-column {
+  flex: 1;
 }
 
 /* Style the form fields */
@@ -32,7 +43,9 @@ mat-form-field {
 
 /* Style the signup button */
 button {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 50%;
   padding: 10px;
   margin-top: 10px;
 }
@@ -44,8 +57,9 @@ button {
   margin-top: 10px;
 }
 
-/* Center the loading spinner */
-mat-progress-spinner {
-  display: block;
-  margin: 20px auto;
+/* Center additional text */
+.center-text {
+  text-align: center;
+  margin-top: 15px;
 }
+

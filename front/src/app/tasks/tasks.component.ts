@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { TasksService } from '../tasks.service';
 import { UserService } from '../users.service';
-import { TaskDialogComponent } from '../task-dialog/task-dialog.component'; // Import dialog component
+import { TaskDialogComponent } from '../task-dialog/task-dialog.component'; // Import Task dialog component
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component'; // Import confirmation dialog component
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogModule here
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
 
 @Component({
   selector: 'app-tasks',
@@ -24,7 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogM
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatDialogModule, // <-- Add MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule, // Add MatSnackBarModule
   ],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
@@ -41,7 +44,8 @@ export class TasksComponent implements OnInit {
   constructor(
     private tasksService: TasksService,
     private userService: UserService,
-    private dialog: MatDialog // Add MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar // Add MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -115,6 +119,10 @@ export class TasksComponent implements OnInit {
       if (result) {
         this.tasksService.createTask(result).subscribe(() => {
           this.fetchTasks(); // Refresh tasks after creation
+          this.snackBar.open('Task created successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar'],
+          });
         });
       }
     });
@@ -134,6 +142,10 @@ export class TasksComponent implements OnInit {
       if (result) {
         this.tasksService.updateTask(result.id, result).subscribe(() => {
           this.fetchTasks(); // Refresh tasks after update
+          this.snackBar.open('Task updated successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar'],
+          });
         });
       }
     });
@@ -146,13 +158,17 @@ export class TasksComponent implements OnInit {
         title: 'Delete Task Confirmation',
         message: 'Are you sure you want to delete this task?',
       },
-      autoFocus: false, // Prevent auto-focus on the first button
+      autoFocus: false,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
         this.tasksService.deleteTask(taskId).subscribe(() => {
           this.fetchTasks(); // Refresh tasks after deletion
+          this.snackBar.open('Task deleted successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar'],
+          });
         });
       }
     });

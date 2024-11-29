@@ -1,7 +1,14 @@
 <div class="login-container">
   <div class="login-form-box">
+    <!-- Logo -->
+    <div style="text-align: center">
+      <img src="logo.png" alt="Tasky logo" style="width: 200px; height: auto" />
+    </div>
+
+    <!-- Title -->
     <h2>Login</h2>
 
+    <!-- Login Form -->
     <form (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
@@ -11,7 +18,7 @@
           id="mail"
           [(ngModel)]="mail"
           name="mail"
-          placeholder="mail"
+          placeholder="Enter your email"
           required
         />
       </mat-form-field>
@@ -24,7 +31,7 @@
           id="password"
           [(ngModel)]="password"
           name="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           required
         />
       </mat-form-field>
@@ -34,9 +41,12 @@
       </button>
     </form>
 
-    <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+    <!-- Links -->
+    <p class="center-text">
+      Don't have an account? <a href="/signup">Sign up here</a>
+    </p>
 
-    <!-- Show error message if login fails -->
+    <!-- Error Message -->
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
 </div>

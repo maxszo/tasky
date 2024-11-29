@@ -122,3 +122,9 @@
   align-items: center;
   padding: 10px 0;
 }
+
+.success-snackbar {
+  background-color: #43a047; /* Green background */
+  color: white;
+  font-weight: bold;
+}
