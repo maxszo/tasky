@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';  // <-- Import MatSnackBar
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule
   ],
   styleUrls: ['./login.component.css']
 })
@@ -25,9 +24,12 @@ export class LoginComponent implements OnInit {
   mail: string = '';
   password: string = '';
   errorMessage: string | null = null;
-  isLoading: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar  // <-- Inject MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('authToken');
@@ -38,24 +40,27 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.isLoading = true; // Show the spinner when submitting the form
-    this.errorMessage = null; // Reset the error message
+    // Reset error message on each attempt
+    this.errorMessage = null;
 
     const loginData = { mail: this.mail, password: this.password };
 
     this.http.post<{ token: string }>('http://localhost:8080/api/auth/login', loginData).subscribe({
       next: (response) => {
         localStorage.setItem('authToken', response.token);
-        alert('Login successful!');
+        
+        // Show success message using MatSnackBar
+        this.snackBar.open('Login successful!', 'Close', {
+          duration: 3000,  // Duration the snack bar will show
+          panelClass: ['success-snackbar'],  // Custom class for styling
+        });
+        
         this.router.navigate(['/tasks']);
       },
       error: (error) => {
+        // Set the error message to show to the user
         this.errorMessage = 'Login failed. Please check your credentials.';
         console.error(error);
-      },
-      complete: () => {
-        // Always stop the loading spinner and enable the button
-        this.isLoading = false;
       }
     });
   }

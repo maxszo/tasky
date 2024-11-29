@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TasksService } from '../tasks.service';
 import { UserService } from '../users.service';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component'; // Import dialog component
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component'; // Import confirmation dialog component
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogModule here
 
 @Component({
   selector: 'app-tasks',
@@ -22,11 +24,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
+    MatDialogModule, // <-- Add MatDialogModule
   ],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
 })
-
 export class TasksComponent implements OnInit {
   tasks: any[] = [];
   todoTasks: any[] = [];
@@ -108,7 +110,7 @@ export class TasksComponent implements OnInit {
         title: 'Create Task',
       },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.tasksService.createTask(result).subscribe(() => {
@@ -117,7 +119,7 @@ export class TasksComponent implements OnInit {
       }
     });
   }
-  
+
   openUpdateDialog(task: any) {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '400px',
@@ -127,7 +129,7 @@ export class TasksComponent implements OnInit {
         title: 'Update Task',
       },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.tasksService.updateTask(result.id, result).subscribe(() => {
@@ -138,8 +140,21 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(taskId: number) {
-    this.tasksService.deleteTask(taskId).subscribe(() => {
-      this.fetchTasks();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: {
+        title: 'Delete Task Confirmation',
+        message: 'Are you sure you want to delete this task?',
+      },
+      autoFocus: false, // Prevent auto-focus on the first button
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'confirm') {
+        this.tasksService.deleteTask(taskId).subscribe(() => {
+          this.fetchTasks(); // Refresh tasks after deletion
+        });
+      }
     });
   }
 

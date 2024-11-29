@@ -37,3 +37,10 @@
 .logout-btn:hover {
   background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
 }
+
+/* Success snackbar style */
+.success-snackbar {
+  background-color: #4caf50;  /* Green */
+  color: white;
+  font-weight: bold;
+}
