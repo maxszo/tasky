@@ -49,3 +49,10 @@ mat-progress-spinner {
   display: block;
   margin: 20px auto;
 }
+
+/* Success snackbar style */
+.success-snackbar {
+  background-color: #4caf50;  /* Green */
+  color: white;
+  font-weight: bold;
+}

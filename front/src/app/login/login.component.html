@@ -29,24 +29,14 @@
         />
       </mat-form-field>
 
-      <button
-        mat-flat-button
-        color="primary"
-        type="submit"
-        [disabled]="isLoading"
-      >
+      <button mat-flat-button color="primary" type="submit" [disabled]="false">
         Login
       </button>
     </form>
 
     <p>Don't have an account? <a href="/signup">Sign up here</a></p>
 
+    <!-- Show error message if login fails -->
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-
-    <!-- Loading spinner -->
-    <mat-progress-spinner
-      *ngIf="isLoading"
-      mode="indeterminate"
-    ></mat-progress-spinner>
   </div>
 </div>
