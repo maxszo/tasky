@@ -2,6 +2,8 @@ package com.api.service;
 
 import com.api.model.Users;
 import com.api.repository.UserRepository;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,19 +16,21 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * Constructor to inject the UserRepository into the UserService.
      * 
      * @param userRepository the UserRepository instance used for data access
      */
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public Users authenticateUser(String email, String password) {
+    public Users authenticateUser(String email, String rawPassword) {
         Users user = userRepository.findByMail(email);
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && passwordEncoder.matches(rawPassword, user.getPassword())) {
             return user;
         }
         return null; // Return null if authentication fails
@@ -54,13 +58,9 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    /**
-     * Saves a user to the database. If the user already exists, it is updated.
-     * 
-     * @param user the user to be saved or updated
-     * @return the saved or updated user
-     */
     public Users saveUser(Users user) {
+        // Encrypt the password before saving
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
