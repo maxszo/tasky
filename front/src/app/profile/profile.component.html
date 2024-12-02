@@ -1,56 +1,96 @@
 <div class="profile-container">
   <mat-card class="profile-card">
+    <!-- Title -->
     <h2 class="card-title">User Profile</h2>
 
     <!-- Profile Form -->
     <form (ngSubmit)="onSubmit()" #profileForm="ngForm" class="form">
-      <mat-form-field class="full-width">
-        <mat-label>First Name</mat-label>
-        <input
-          matInput
-          [(ngModel)]="user.firstname"
-          name="firstname"
-          required
-        />
-        <mat-error *ngIf="profileForm.submitted && !user.firstname"
-          >First Name is required</mat-error
-        >
-      </mat-form-field>
+      <div class="form-columns">
+        <div class="left-column">
+          <mat-form-field class="full-width">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              [(ngModel)]="user.firstname"
+              name="firstname"
+              required
+            />
+            <mat-error *ngIf="profileForm.submitted && !user.firstname"
+              >First Name is required</mat-error
+            >
+          </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <mat-label>Last Name</mat-label>
-        <input matInput [(ngModel)]="user.lastname" name="lastname" required />
-        <mat-error *ngIf="profileForm.submitted && !user.lastname"
-          >Last Name is required</mat-error
-        >
-      </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              [(ngModel)]="user.lastname"
+              name="lastname"
+              required
+            />
+            <mat-error *ngIf="profileForm.submitted && !user.lastname"
+              >Last Name is required</mat-error
+            >
+          </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          type="email"
-          [(ngModel)]="user.mail"
-          name="mail"
-          required
-        />
-        <mat-error *ngIf="profileForm.submitted && !user.mail"
-          >Email is required</mat-error
-        >
-      </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Job</mat-label>
+            <mat-select [(ngModel)]="user.job" name="job" required>
+              <mat-option value="" disabled selected
+                >Choose your job</mat-option
+              >
+              <mat-option value="DEVELOPPEUR">Développeur</mat-option>
+              <mat-option value="DEVOPS">DevOps</mat-option>
+              <mat-option value="CHEF_DE_PROJET">Chef de Projet</mat-option>
+              <mat-option value="PRODUCT_OWNER">Product Owner</mat-option>
+              <mat-option value="ARCHITECTE_INFRA">Architecte Infra</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-      <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          type="password"
-          [(ngModel)]="user.password"
-          name="password"
-        />
-        <mat-hint
-          >Leave blank if you don't want to change your password</mat-hint
-        >
-      </mat-form-field>
+        <div class="right-column">
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              [(ngModel)]="user.mail"
+              name="mail"
+              disabled
+              required
+            />
+            <mat-error *ngIf="profileForm.submitted && !user.mail"
+              >Email is required</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              name="password"
+              [(ngModel)]="user.password"
+            />
+            <mat-hint class="hint-text smaller"
+              >Leave blank if you don't want to change it</mat-hint
+            >
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input
+              matInput
+              type="password"
+              name="confirmPassword"
+              [(ngModel)]="user.confirmPassword"
+            />
+            <mat-hint class="hint-text smaller"
+              >Leave blank if you don't want to change it</mat-hint
+            >
+          </mat-form-field>
+        </div>
+      </div>
 
       <button mat-flat-button color="primary" type="submit" class="btn-submit">
         Update Profile
@@ -58,8 +98,5 @@
     </form>
 
     <mat-error *ngIf="errorMessage" class="error">{{ errorMessage }}</mat-error>
-    <mat-hint *ngIf="successMessage" class="success">{{
-      successMessage
-    }}</mat-hint>
   </mat-card>
 </div>
