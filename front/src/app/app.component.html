@@ -1,4 +1,8 @@
-<div *ngIf="showNavbar">
-  <app-navbar></app-navbar>
+<div class="app-layout">
+  <div class="navbar-container" *ngIf="showNavbar">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<router-outlet></router-outlet>

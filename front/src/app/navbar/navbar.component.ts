@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';  // <-- Import MatSnackBar
 import { MatDialog } from '@angular/material/dialog'; // <-- Import MatDialog here
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog'; // <-- Import MatDia
     MatButtonModule,
     MatIconModule,
     MatDialogModule,  // <-- Import MatDialogModule here
+    RouterModule,
   ],
 })
 export class NavbarComponent {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar'; // <-- Import MatSnackBar
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,7 @@ import { MatOptionModule } from '@angular/material/core';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatOptionModule,
+    RouterModule,
   ],
   styleUrls: ['./signup.component.css']
 })

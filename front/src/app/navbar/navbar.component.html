@@ -1,18 +1,20 @@
 <mat-toolbar color="primary" class="navbar">
-  <img src="logo.png" alt="Tasky logo" style="width: 120px; height: auto" />
+  <a routerLink="/tasks" class="logo-link">
+    <img src="logo.png" alt="Tasky logo" style="width: 120px; height: auto" />
+  </a>
 
   <div class="navbar-links">
     <button mat-button routerLink="/tasks" class="nav-btn">
       <mat-icon>work</mat-icon>
-      <a href="/tasks" class="nav-btn">Progress</a>
+      Progress
     </button>
     <button mat-button routerLink="/statistic" class="nav-btn">
       <mat-icon>insert_chart</mat-icon>
-      <a href="/statistic" class="nav-btn">Statistic</a>
+      Statistic
     </button>
     <button mat-button routerLink="/profile" class="nav-btn">
       <mat-icon>account_circle</mat-icon>
-      <a href="/profile" class="nav-btn">Profile</a>
+      Profile
     </button>
     <button mat-button (click)="onLogout()" class="logout-btn">
       <mat-icon>exit_to_app</mat-icon> Logout
