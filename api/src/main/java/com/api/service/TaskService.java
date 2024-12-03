@@ -2,6 +2,8 @@ package com.api.service;
 
 import com.api.model.Task;
 import com.api.repository.TaskRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
  */
 @Service
 public class TaskService {
+    @Autowired
+    private EmailService emailService;
     private final TaskRepository taskRepository;
 
     /**
@@ -63,5 +67,13 @@ public class TaskService {
      */
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
+    }
+
+    public void sendMailForTask(Task task) {
+        if (task.getUsers() == null)
+            return;
+        emailService.sendTaskNotification(task.getUsers().getMail(),
+                task.getName(),
+                task.getDescription());
     }
 }

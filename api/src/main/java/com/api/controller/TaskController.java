@@ -48,28 +48,19 @@ public class TaskController {
         return taskService.getTaskById(id);
     }
 
-    /**
-     * Creates a new task.
-     *
-     * @param task the Task object to create
-     * @return the newly created Task object
-     */
     @PostMapping
     public Task createTask(@RequestBody Task task) {
-        return taskService.saveTask(task);
+        Task createdTask = taskService.saveTask(task);
+        taskService.sendMailForTask(task);
+        return createdTask;
     }
 
-    /**
-     * Updates an existing task with the specified ID.
-     *
-     * @param id   the ID of the task to update
-     * @param task the updated Task object
-     * @return the updated Task object
-     */
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
         task.setId(id);
-        return taskService.saveTask(task);
+        Task updatedTask = taskService.saveTask(task);
+        taskService.sendMailForTask(task);
+        return updatedTask;
     }
 
     /**
