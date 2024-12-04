@@ -41,3 +41,11 @@
     overflow-y: auto;
   }
   
+ /* Style the error message */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+  
+  

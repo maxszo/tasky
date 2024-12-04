@@ -55,6 +55,10 @@
     </mat-form-field>
   </form>
 </div>
+
+<!-- Error Message -->
+<p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
   <button mat-flat-button color="primary" (click)="onSave()">Save</button>
