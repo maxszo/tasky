@@ -11,7 +11,6 @@
 .navbar-brand {
   font-size: 1.8em;
   font-weight: bold;
-  color: rgb(0,92,187);
 }
 
 /* Navbar links container */
@@ -25,7 +24,6 @@
   display: flex;
   align-items: center;
   gap: 5px; /* Space between icon and text */
-  color: rgb(0,92,187);
 }
 
 /* Hover effect for buttons */

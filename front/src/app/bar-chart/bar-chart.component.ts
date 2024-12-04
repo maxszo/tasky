@@ -63,17 +63,17 @@ export class BarChartComponent {
         labels: users, // Users on the X-Axis
         datasets: [
           {
-            label: "TO_DO",
+            label: "Todo",
             data: todoCounts,
             backgroundColor: '#F08080', // Light Blue
           },
           {
-            label: "IN_PROGRESS",
+            label: "In Progress",
             data: inProgressCounts,
             backgroundColor: '#D3D3D3', // Light Grey
           },
           {
-            label: "DONE",
+            label: "Done",
             data: doneCounts,
             backgroundColor: '#ADD8E6', // Light Coral/Red
           },

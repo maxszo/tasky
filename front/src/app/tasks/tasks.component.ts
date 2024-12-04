@@ -14,6 +14,14 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-tasks',
@@ -27,7 +35,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSn
     MatSelectModule,
     MatOptionModule,
     MatDialogModule,
-    MatSnackBarModule, // Add MatSnackBarModule
+    MatSnackBarModule,
+    CdkDropListGroup, 
+    CdkDropList, 
+    CdkDrag,
   ],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
@@ -181,4 +192,42 @@ export class TasksComponent implements OnInit {
   onPriorityChange() {
     this.applyFilters();
   }
+
+  getColumnState(columnId: string): string {
+    switch (columnId) {
+      case 'todo-column': return 'TO_DO';
+      case 'in-progress-column': return 'IN_PROGRESS';
+      case 'done-column': return 'DONE';
+      default: return '';
+    }
+  }
+  
+
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const task = event.previousContainer.data[event.previousIndex]; // Get the moved task
+      const newState = this.getColumnState(event.container.id); // Determine the new state based on the container
+  
+      if (task.state !== newState) {
+        task.state = newState; // Update the task's state locally
+        this.tasksService.updateTask(task.id, task).subscribe(() => {
+          this.snackBar.open('Task updated successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar'],
+          });
+          this.fetchTasks(); // Refresh tasks after update
+        });
+      }
+  
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
+  
 }

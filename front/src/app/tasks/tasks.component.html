@@ -41,149 +41,183 @@
   </div>
 
   <!-- Task Columns -->
-  <div class="tasks-container">
+  <div class="tasks-container" cdkDropListGroup>
     <!-- Todo Column -->
-    <div class="column todo">
+    <div
+      id="todo-column"
+      class="column todo"
+      [cdkDropListData]="todoTasks"
+      cdkDropList
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="drop($event)"
+    >
       <h2>Todo</h2>
-      <div *ngFor="let task of todoTasks" class="task-card">
-        <div class="task-header">
-          <h3>{{ task.name }}</h3>
-          <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
-        </div>
-        <p><strong>Description:</strong> {{ task.description }}</p>
-        <p>
-          <strong>Priority: </strong>
-          <span
-            class="badge"
-            [ngClass]="{
-              high: task.priority === 'HIGH',
-              medium: task.priority === 'MEDIUM',
-              low: task.priority === 'LOW'
-            }"
-          >
-            {{ task.priority }}
-          </span>
-        </p>
+      @for (task of todoTasks; track task) {
+      <div class="example-box" cdkDrag>
+        <div class="task-card">
+          <div class="task-header">
+            <h3>{{ task.name }}</h3>
+            <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
+          </div>
+          <p><strong>Description:</strong> {{ task.description }}</p>
+          <p>
+            <strong>Priority: </strong>
+            <span
+              class="badge"
+              [ngClass]="{
+                high: task.priority === 'HIGH',
+                medium: task.priority === 'MEDIUM',
+                low: task.priority === 'LOW'
+              }"
+            >
+              {{ task.priority }}
+            </span>
+          </p>
 
-        <p *ngIf="task.users">
-          <strong>User:</strong> {{ task.users.firstname }}
-          {{ task.users.lastname }}
-        </p>
+          <p *ngIf="task.users">
+            <strong>User:</strong> {{ task.users.firstname }}
+            {{ task.users.lastname }}
+          </p>
 
-        <div class="task-actions">
-          <button
-            mat-stroked-button
-            color="accent"
-            (click)="openUpdateDialog(task)"
-          >
-            <mat-icon>edit</mat-icon> Update
-          </button>
-          <button
-            mat-stroked-button
-            color="warn"
-            class="delete-btn"
-            (click)="deleteTask(task.id)"
-          >
-            <mat-icon>delete</mat-icon> Delete
-          </button>
+          <div class="task-actions">
+            <button
+              mat-stroked-button
+              color="accent"
+              (click)="openUpdateDialog(task)"
+            >
+              <mat-icon>edit</mat-icon> Update
+            </button>
+            <button
+              mat-stroked-button
+              color="warn"
+              class="delete-btn"
+              (click)="deleteTask(task.id)"
+            >
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </div>
         </div>
       </div>
+      }
     </div>
 
     <!-- In Progress Column -->
-    <div class="column in-progress">
+    <div
+      id="in-progress-column"
+      class="column in-progress"
+      [cdkDropListData]="inProgressTasks"
+      cdkDropList
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="drop($event)"
+    >
       <h2>In Progress</h2>
-      <div *ngFor="let task of inProgressTasks" class="task-card">
-        <div class="task-header">
-          <h3>{{ task.name }}</h3>
-          <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
-        </div>
-        <p><strong>Description:</strong> {{ task.description }}</p>
-        <p>
-          <strong>Priority: </strong>
-          <span
-            class="badge"
-            [ngClass]="{
-              high: task.priority === 'HIGH',
-              medium: task.priority === 'MEDIUM',
-              low: task.priority === 'LOW'
-            }"
-          >
-            {{ task.priority }}
-          </span>
-        </p>
 
-        <p *ngIf="task.users">
-          <strong>User:</strong> {{ task.users.firstname }}
-          {{ task.users.lastname }}
-        </p>
+      @for (task of inProgressTasks; track task) {
+      <div class="example-box" cdkDrag>
+        <div class="task-card">
+          <div class="task-header">
+            <h3>{{ task.name }}</h3>
+            <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
+          </div>
+          <p><strong>Description:</strong> {{ task.description }}</p>
+          <p>
+            <strong>Priority: </strong>
+            <span
+              class="badge"
+              [ngClass]="{
+                high: task.priority === 'HIGH',
+                medium: task.priority === 'MEDIUM',
+                low: task.priority === 'LOW'
+              }"
+            >
+              {{ task.priority }}
+            </span>
+          </p>
 
-        <div class="task-actions">
-          <button
-            mat-stroked-button
-            color="accent"
-            (click)="openUpdateDialog(task)"
-          >
-            <mat-icon>edit</mat-icon> Update
-          </button>
-          <button
-            mat-stroked-button
-            color="warn"
-            class="delete-btn"
-            (click)="deleteTask(task.id)"
-          >
-            <mat-icon>delete</mat-icon> Delete
-          </button>
+          <p *ngIf="task.users">
+            <strong>User:</strong> {{ task.users.firstname }}
+            {{ task.users.lastname }}
+          </p>
+
+          <div class="task-actions">
+            <button
+              mat-stroked-button
+              color="accent"
+              (click)="openUpdateDialog(task)"
+            >
+              <mat-icon>edit</mat-icon> Update
+            </button>
+            <button
+              mat-stroked-button
+              color="warn"
+              class="delete-btn"
+              (click)="deleteTask(task.id)"
+            >
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </div>
         </div>
       </div>
+      }
     </div>
 
     <!-- Done Column -->
-    <div class="column done">
+    <div
+      id="done-column"
+      class="column done"
+      [cdkDropListData]="doneTasks"
+      cdkDropList
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="drop($event)"
+    >
       <h2>Done</h2>
-      <div *ngFor="let task of doneTasks" class="task-card">
-        <div class="task-header">
-          <h3>{{ task.name }}</h3>
-          <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
-        </div>
-        <p><strong>Description:</strong> {{ task.description }}</p>
-        <p>
-          <strong>Priority: </strong>
-          <span
-            class="badge"
-            [ngClass]="{
-              high: task.priority === 'HIGH',
-              medium: task.priority === 'MEDIUM',
-              low: task.priority === 'LOW'
-            }"
-          >
-            {{ task.priority }}
-          </span>
-        </p>
+      @for (task of doneTasks; track task) {
+      <div class="example-box" cdkDrag>
+        <div class="task-card">
+          <div class="task-header">
+            <h3>{{ task.name }}</h3>
+            <span class="user-story-badge"> #{{ task.userStoryNumber }} </span>
+          </div>
+          <p><strong>Description:</strong> {{ task.description }}</p>
+          <p>
+            <strong>Priority: </strong>
+            <span
+              class="badge"
+              [ngClass]="{
+                high: task.priority === 'HIGH',
+                medium: task.priority === 'MEDIUM',
+                low: task.priority === 'LOW'
+              }"
+            >
+              {{ task.priority }}
+            </span>
+          </p>
 
-        <p *ngIf="task.users">
-          <strong>User:</strong> {{ task.users.firstname }}
-          {{ task.users.lastname }}
-        </p>
+          <p *ngIf="task.users">
+            <strong>User:</strong> {{ task.users.firstname }}
+            {{ task.users.lastname }}
+          </p>
 
-        <div class="task-actions">
-          <button
-            mat-stroked-button
-            color="accent"
-            (click)="openUpdateDialog(task)"
-          >
-            <mat-icon>edit</mat-icon> Update
-          </button>
-          <button
-            mat-stroked-button
-            color="warn"
-            class="delete-btn"
-            (click)="deleteTask(task.id)"
-          >
-            <mat-icon>delete</mat-icon> Delete
-          </button>
+          <div class="task-actions">
+            <button
+              mat-stroked-button
+              color="accent"
+              (click)="openUpdateDialog(task)"
+            >
+              <mat-icon>edit</mat-icon> Update
+            </button>
+            <button
+              mat-stroked-button
+              color="warn"
+              class="delete-btn"
+              (click)="deleteTask(task.id)"
+            >
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </div>
         </div>
       </div>
+      }
     </div>
   </div>
 </div>

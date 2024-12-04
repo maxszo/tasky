@@ -1,5 +1,8 @@
 .tasks-page {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 90px);
 }
 
 .head {
@@ -21,10 +24,13 @@
 .tasks-container {
   display: flex;
   gap: 20px;
+  flex: 1; /* Makes it grow to fill the available height */
 }
 
 .column {
   flex: 1;
+  min-height: 100%; /* Ensure it stretches vertically */
+  flex-direction: column; /* Keep content stacked */
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
@@ -43,6 +49,11 @@
   margin-bottom: 10px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.column > .example-box {
+  flex-grow: 1;
+  overflow: auto; /* Prevent content overflow inside the column */
 }
 
 .task-card h3 {
@@ -127,4 +138,21 @@
   background-color: #43a047; /* Green background */
   color: white;
   font-weight: bold;
+}
+
+.cdk-drag-preview {
+  border-radius: 8px; /* Keep it consistent with task cards */
+  margin: 0; /* Remove any margins */
+  overflow: hidden; /* Prevent scrollbars during drag */
+}
+
+
+.cdk-drag-placeholder {
+  visibility: hidden; /* Keep it invisible for smooth dragging experience */
+  height: 0; /* Avoid any layout disruption */
+  margin: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
