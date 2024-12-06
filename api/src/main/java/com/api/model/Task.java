@@ -22,6 +22,28 @@ public class Task {
     @JoinColumn(name = "users_id")
     private Users users;
 
+    // Default constructor
+    public Task() {
+    }
+
+    // Constructor with all fields
+    public Task(Long id, String userStoryNumber, String name, String description, String state, String priority,
+            Users users) {
+        this.id = id;
+        this.userStoryNumber = userStoryNumber;
+        this.name = name;
+        this.description = description;
+        this.state = state;
+        this.priority = priority;
+        this.users = users;
+    }
+
+    // Constructor with required fields (id, name)
+    public Task(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     /**
      * Gets the task's unique identifier.
      * 

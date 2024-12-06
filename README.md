@@ -80,13 +80,13 @@ Use the following SQL script to populate your database with sample data:
 ```sql
 -- Insérer des utilisateurs
 INSERT INTO users (id, firstname, lastname, mail, password, job) VALUES
-(100, 'Max', 'Szostkiewicz', 'maxszo@mail.com', 'password', 'Développeur'),
-(101, 'Alice', 'Durand', 'alice.durand@example.com', 'password123', 'Développeur'),
-(102, 'Bob', 'Lemoine', 'bob.lemoine@example.com', 'securepass456', 'Chercheur'),
-(103, 'Claire', 'Dupuis', 'claire.dupuis@example.com', 'qwerty789', 'Designer'),
-(104, 'David', 'Morel', 'david.morel@example.com', 'mypassword111', 'Manager'),
-(105, 'Emma', 'Bertrand', 'emma.bertrand@example.com', 'pass4321', 'Data Scientist'),
-(106, 'Felix', 'Leroux', 'felix.leroux@example.com', 'abc123456', 'Développeur');
+(100, 'Max', 'Szostkiewicz', 'maxszo@mail.com', 'password', 'DEVELOPPEUR'),
+(101, 'Alice', 'Durand', 'alice.durand@example.com', 'password123', 'PRODUCT_OWNER'),
+(102, 'Bob', 'Lemoine', 'bob.lemoine@example.com', 'securepass456', 'ARCHITECTE_INFRA'),
+(103, 'Claire', 'Dupuis', 'claire.dupuis@example.com', 'qwerty789', 'DEVOPS'),
+(104, 'David', 'Morel', 'david.morel@example.com', 'mypassword111', 'CHEF_DE_PROJET'),
+(105, 'Emma', 'Bertrand', 'emma.bertrand@example.com', 'pass4321', 'PRODUCT_OWNER'),
+(106, 'Felix', 'Leroux', 'felix.leroux@example.com', 'abc123456', 'ARCHITECTE_INFRA');
 
 -- Insérer des tâches
 INSERT INTO task (id, user_story_number, name, description, state, priority, users_id) VALUES

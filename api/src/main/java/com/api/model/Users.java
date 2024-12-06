@@ -26,6 +26,19 @@ public class Users {
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
+    // Constructors
+    public Users() {
+    }
+
+    public Users(Long id, String firstname, String lastname, String mail, String password, String job) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.mail = mail;
+        this.password = password;
+        this.job = job;
+    }
+
     /**
      * Gets the user's unique identifier.
      * 
